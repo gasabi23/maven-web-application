@@ -23,12 +23,12 @@ node{
        "deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'"
 
 	}
-	//stage('6.ManualApproval'){
-	 //   sh "echo 'please review the application performance' "
-	   // timeout(time:600, unit:'MINUTES') {
-	    //    input message: 'Application ready for deployment, please review and approve'
-	   // }
-//	}
+	stage('6.ManualApproval'){
+	   sh "echo 'please review the application performance' "
+	    timeout(time:100, unit:'MINUTES') {
+	     input message: 'Application ready for deployment, please review and approve'
+	    }
+	}
 	stage('7.Deploy2Prod'){
 	    sh "echo 'Deploy application to the customers/production'"
 	    "deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'"
