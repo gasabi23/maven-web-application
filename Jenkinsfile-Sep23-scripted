@@ -43,7 +43,7 @@ node{
         sh "echo 'notify the team for unusual accurances' "
         sh "echo 'notify the team if the applications are down' "
         sh "echo 'notify the team if the latency is higher that expected' "
-        emailext body: '''Hi Team,
+        emailext body: '''Hi Team;
 
 The build and Deployment status for tesla-app follows.
 
@@ -51,5 +51,6 @@ Regards,
 Landmark Technologies ''', recipientProviders: [buildUser(), contributor(), developers(), requestor()], subject: 'build and deployment status', to: 'mylandmarktech@gmail.com'
 
     }
+}
 }
 
