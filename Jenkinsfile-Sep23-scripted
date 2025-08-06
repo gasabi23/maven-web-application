@@ -39,7 +39,6 @@ node{
         sh "echo 'monitoring and observation and alerting' "
         sh "echo 'application performance Monitoring in progress' "
     }
-    /*
 stage('9.emailNotification'){
         sh "echo 'notify the team for unusual accurances' "
         sh "echo 'notify the team if the applications are down' "
@@ -52,7 +51,6 @@ Regards,
 Landmark Technologies ''', recipientProviders: [buildUser(), contributor(), developers(), requestor()], subject: 'build and deployment status', to: 'mylandmarktech@gmail.com'
 
     }
-*/
-}
+
 
 
