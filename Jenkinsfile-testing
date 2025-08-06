@@ -1,0 +1,40 @@
+node{
+    def mavenHome = tool name: 'maven3.9.11'
+	stage('1.clone the code'){
+	//sh "git clone https://github.com/gasabi23/maven-web-application.git"
+	"git https://github.com/gasabi23/maven-web-application.git"
+	}
+	stage('2.mvnBuild'){
+	sh "${mavenHome}/bin/mvn clean package"
+    }
+	stage('3.CodeQuality'){
+    sh "${mavenHome}/bin/mvn sonar:sonar"
+    // edit pom.xml propertiesTag with sonarqube server details
+	}
+	stage('4.UploadArtifacts'){
+	sh "${mavenHome}/bin/mvn deploy"
+	//edit pom.xml distribution Management Tag with repo details
+	//edit setting .xml with nexus-user login credentials
+	//open required port.
+	}
+	stage('5.Deploy2UAT'){
+	    //use deploy-to-container plugin via pipeline syntax
+	  
+       "deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'"
+
+	}
+	//stage('6.ManualApproval'){
+	 //   sh "echo 'please review the application performance' "
+	   // timeout(time:600, unit:'MINUTES') {
+	    //    input message: 'Application ready for deployment, please review and approve'
+	   // }
+//	}
+	stage('7.Deploy2Prod'){
+	    sh "echo 'Deploy application to the customers/production'"
+	    "deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'"
+	}
+	stage('8.EmailNotification'){
+	   emailext body: '''Hello Team;
+Our deployment is successful, we need to switch to production''', recipientProviders: [contributor(), developers(), buildUser()], subject: 'New deployment notification', to: 'olu.asabi@gmail.com'
+	}
+}
