@@ -7,10 +7,10 @@ node{
 	stage('2.mvnBuild'){
 	sh "${mavenHome}/bin/mvn clean package"
     }
-	//stage('3.CodeQuality'){
-    //sh "${mavenHome}/bin/mvn sonar:sonar"
+	stage('3.CodeQuality'){
+        sh "${mavenHome}/bin/mvn sonar:sonar"
     // edit pom.xml propertiesTag with sonarqube server details
-	//}
+	}
 	stage('4.UploadArtifacts'){
 	sh "${mavenHome}/bin/mvn deploy"
 	//edit pom.xml distribution Management Tag with repo details
