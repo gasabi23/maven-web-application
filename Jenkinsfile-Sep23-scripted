@@ -48,7 +48,7 @@ stage('9.emailNotification'){
 The build and Deployment status for tesla-app follows.
 
 Regards,
-Landmark Technologies ''', recipientProviders: [buildUser(), contributor(), developers(), requestor()], subject: 'build and deployment status', to: 'mylandmarktech@gmail.com'
+Landmark Technologies ''', recipientProviders: [buildUser(), contributor(), developers(), requestor()], subject: 'build and deployment status', to: 'olu.asabi@gmail.com'
 
     }
 }
