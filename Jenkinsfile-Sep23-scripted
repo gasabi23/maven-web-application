@@ -26,13 +26,13 @@ node{
     }
     stage('6.6ManualApproval'){
         sh "echo 'Please review the application performance' "
-        //timeout(time:600, unit:'MINUTES') {
-        //input message: 'Application ready for deployment, Please review and approve'
+        timeout(time:100, unit:'MINUTES') {
+        input message: 'Application ready for deployment, Please review and approve'
       }       
     }
     stage('7.Deploy2Prod'){
       sh "echo 'Deploy application to the customers/production' " 
-     //deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://34.219.51.216:8177/')], contextPath: null, war: 'target/*war'
+     "deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://34.219.51.216:8177/')], contextPath: null, war: 'target/*war'"
          
     }
     stage('8.APM'){
