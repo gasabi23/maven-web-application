@@ -33,7 +33,7 @@ pipeline{
       }
       stage('5.Deploy2UAT'){
         steps{
-            deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://34.219.51.216:8177/')], contextPath: null, war: 'target/*war'
+            deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'
         }
       }
       stage('6.ManualApproval'){
@@ -46,7 +46,7 @@ pipeline{
       }
       stage('7.Deploy2Prod'){
         steps{
-            deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://34.219.51.216:8177/')], contextPath: null, war: 'target/*war'
+            deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat-credential', path: '', url: 'http://54.88.145.80:8080/')], contextPath: null, war: 'target/*war'
          }
       }
     }
